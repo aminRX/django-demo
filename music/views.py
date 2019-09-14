@@ -6,8 +6,10 @@ from django.http import Http404
 from django.http import HttpResponse, JsonResponse
 from music.models import Musician, Album
 from music.serializers import MusicianSerializer, AlbumSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class ListMusicians(APIView):
+    permission_classes = (IsAuthenticated,)
     """
     View to list all Musicians in the system.
 
@@ -28,6 +30,7 @@ class ListMusicians(APIView):
         return Response(serializer_musician.data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 class MusicianDetail(APIView):
+    permission_classes = (IsAuthenticated,)
     """
     View to list all Musicians in the system.
 
